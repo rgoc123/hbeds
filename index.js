@@ -37,6 +37,7 @@ const Bed = require('./models/Bed.js')
 const Patient = require('./models/Patient.js')
 
 // ASSOCIATIONS
+Room.hasMany(Bed)
 Bed.belongsTo(Room)
 Patient.belongsTo(Bed)
 

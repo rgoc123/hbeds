@@ -1,8 +1,11 @@
 const Room = require('../models/Room.js')
+const Bed = require('../models/Bed.js')
 
 exports.getAllRooms = async (req, res, next) => {
   try {
-    const rooms = await Room.findAll()
+    const rooms = await Room.findAll({
+      include: [{ model: Bed }]
+    })
 
     return res.status(200).json({ status: 200, data: rooms, message: 'Got all rooms!' })
   } catch (err) {
