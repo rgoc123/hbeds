@@ -60,10 +60,15 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 // CONTROLLERS
 const userController = require('./controllers/userController.js');
 const authController = require('./controllers/authController.js');
+const roomController = require('./controllers/roomController.js');
 
 // ROUTES
+// User
 app.post('/v1/register', userController.register);
 app.post('/v1/login', userController.login);
+
+// Room
+app.get('/v1/rooms', roomController.getAllRooms);
 
 const port = process.env.PORT || 7001;
 app.listen(port, function() {
