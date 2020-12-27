@@ -32,6 +32,9 @@ module.exports.sequelize = sequelize;
 
 // MODELS
 const User = require('./models/User.js');
+const Room = require('./models/Room.js')
+const Bed = require('./models/Bed.js')
+const Patient = require('./models/Patient.js')
 
 // ASSOCIATIONS
 
@@ -40,9 +43,9 @@ const User = require('./models/User.js');
 
 
 // sequelize.drop();
-sequelize.sync({ force: true }).then(() => {
-  // createDbEntries();
-});
+// sequelize.sync({ force: true }).then(() => {
+//   // createDbEntries();
+// });
 
 
 // SERVER APP
