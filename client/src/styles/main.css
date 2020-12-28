@@ -10,7 +10,12 @@
   top: 10px;
 }
 
+.floor-add-cont {
+  display: flex;
+}
+
 .floor {
+  width: 760px;
   display: flex;
   justify-content: space-around;
   border: 1px solid black;
@@ -26,4 +31,23 @@
   width: 150px;
   height: 150px;
   border: 1px solid blue;
+}
+
+.add-patient-cont {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  align-items: center;
+  border: 1px solid red;
+}
+
+.add-patient {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#name {
+  margin-bottom: 20px;
 }

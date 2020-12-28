@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { persistUser } from '../actions/sessionActions'
 
 import Room from './room'
+import AddPatientForm from './addPatientForm'
 
 class MainPage extends Component {
   constructor() {
@@ -37,7 +38,10 @@ class MainPage extends Component {
         <h2>Welcome to the main page!</h2>
         <h4>You are {(!currentUser || !loggedIn) && 'not'} logged in.</h4>
 
-        <Room />
+        <div className="floor-add-cont">
+          <Room />
+          <AddPatientForm />
+        </div>
       </div>
     );
   }
