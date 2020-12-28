@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { persistUser } from '../actions/sessionActions'
+import { getRooms } from '../util/roomApiUtil'
 
 import Room from './room'
 import AddPatientForm from './addPatientForm'
@@ -10,17 +11,21 @@ class MainPage extends Component {
   constructor() {
     super();
     this.state = {
-      loggedIn: false
+      loggedIn: false,
+      rooms: []
     }
     this.logout = this.logout.bind(this);
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     const loggedInUser = localStorage.getItem('user')
     if (loggedInUser) {
       this.props.persistUser(JSON.parse(loggedInUser))
       this.setState({ loggedIn: true })
     }
+
+    const rooms = await getRooms()
+    this.setState({ rooms })
   }
 
   logout() {
@@ -30,7 +35,7 @@ class MainPage extends Component {
   }
 
   render() {
-    const { loggedIn } = this.state
+    const { loggedIn, rooms } = this.state
     const { currentUser } = this.props
 
     return (
@@ -40,7 +45,7 @@ class MainPage extends Component {
 
         <div className="floor-add-cont">
           <Room />
-          <AddPatientForm />
+          <AddPatientForm rooms={rooms} />
         </div>
       </div>
     );

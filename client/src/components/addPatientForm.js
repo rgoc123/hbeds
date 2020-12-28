@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-export default function AddPatientForm() {
+export default function AddPatientForm({ rooms }) {
   const [name, updateName] = useState('')
   const [gender, updateGender] = useState('')
 
@@ -23,6 +23,10 @@ export default function AddPatientForm() {
           <option value="female">Female</option>
         </select>
       </form>
+
+      <div className="avail-rooms">
+        {rooms.map(room => <p key={room.uuid}>Room {room.number}</p>)}
+      </div>
     </div>
   )
 }
