@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 
 import { getRooms } from '../util/roomApiUtil'
 
+import Bed from './bed'
+
 export default function Room() {
   const [rooms, setRooms] = useState([])
 
@@ -25,15 +27,7 @@ export default function Room() {
                 <p>{room.number}</p>
 
                 <div>
-                  {
-                    room.Beds.map(bed => {
-                      return (
-                        <div className="bed-cont" key={bed.uuid}>
-                          <h5>Bed {bed.number}</h5>
-                        </div>
-                      )
-                    })
-                  }
+                  {room.Beds.map(bed => <Bed bed={bed} key={bed.uuid} />)}
                 </div>
               </div>
             )

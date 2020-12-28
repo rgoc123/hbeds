@@ -39,6 +39,7 @@ const Patient = require('./models/Patient.js')
 // ASSOCIATIONS
 Room.hasMany(Bed)
 Bed.belongsTo(Room)
+Bed.hasOne(Patient)
 Patient.belongsTo(Bed)
 
 // DUMMY DATA
@@ -47,16 +48,18 @@ Patient.belongsTo(Bed)
 // sequelize.drop();
 // sequelize.sync({ force: true }).then(() => {
 //   const createDbEntries = async () => {
-//     const room1 = await Room.create({number: '1'})
-//     const room2 = await Room.create({number: '2'})
-//     const bed1 = await Bed.create({number: 'A'})
-//     const bed2 = await Bed.create({number: 'B'})
-//     const bed3 = await Bed.create({number: 'C'})
-//     const bed4 = await Bed.create({number: 'D'})
+//     const room1 = await Room.create({ number: '1' })
+//     const room2 = await Room.create({ number: '2' })
+//     const bed1 = await Bed.create({ number: 'A' })
+//     const bed2 = await Bed.create({ number: 'B' })
+//     const bed3 = await Bed.create({ number: 'C' })
+//     const bed4 = await Bed.create({ number: 'D' })
+//     const patient1 = await Patient.create({ name: 'Robert O\'Connor', gender: 'male' })
 //     bed1.setRoom(room1)
 //     bed2.setRoom(room1)
 //     bed3.setRoom(room2)
 //     bed4.setRoom(room2)
+//     patient1.setBed(bed4)
 //   }
 //
 //   createDbEntries();

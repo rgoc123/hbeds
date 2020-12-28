@@ -9,6 +9,10 @@ const Patient = sequelize.define('Patient', {
     unique: true,
     allowNull: false
   },
+  name: {
+    type: Sequelize.STRING(100),
+    allowNull: true
+  },
   gender: {
     type: Sequelize.STRING(10),
     allowNull: true
