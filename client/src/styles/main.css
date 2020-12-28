@@ -1,0 +1,29 @@
+.header-container {
+  display: flex;
+  position: relative;
+  justify-content: center;
+}
+
+.header-buttons-cont {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+.floor {
+  display: flex;
+  justify-content: space-around;
+  border: 1px solid black;
+}
+
+.room {
+  width: 400px;
+  height: 400px;
+  border: 1px solid green;
+}
+
+.bed-cont {
+  width: 150px;
+  height: 150px;
+  border: 1px solid blue;
+}
