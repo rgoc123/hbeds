@@ -37,7 +37,7 @@ class MainPage extends Component {
   render() {
     const { loggedIn, rooms } = this.state
     const { currentUser } = this.props
-
+    
     return (
       <div>
         <h2>Welcome to the main page!</h2>

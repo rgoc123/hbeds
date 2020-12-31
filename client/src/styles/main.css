@@ -58,3 +58,11 @@
   flex-direction: column;
   align-items: flex-start;
 }
+
+.avail-bed {
+  width: 100%;
+}
+
+.avail-bed:hover {
+  background-color: #aedbab;
+}

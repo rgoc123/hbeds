@@ -3,6 +3,12 @@ import React, { useState } from 'react'
 export default function AddPatientForm({ rooms }) {
   const [name, updateName] = useState('')
   const [gender, updateGender] = useState('')
+  const [bedSelected, updateBedSelected] = useState(null)
+
+  let bedsAvail = []
+  rooms.forEach((room) => {
+    bedsAvail = bedsAvail.concat(room.Beds.filter(bed => !bed.Patient))
+  });
 
   return (
     <div className="add-patient-cont">
@@ -25,7 +31,13 @@ export default function AddPatientForm({ rooms }) {
       </form>
 
       <div className="avail-rooms">
-        {rooms.map(room => <p key={room.uuid}>Room {room.number}</p>)}
+        {bedsAvail.map(bed => {
+          return (
+            <div className="avail-bed"
+              onClick={() => updateBedSelected(bed.uuid)}
+              key={bed.uuid}>Bed {bed.number}</div>
+          )
+        })}
       </div>
     </div>
   )
