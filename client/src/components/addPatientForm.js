@@ -4,17 +4,27 @@ export default function AddPatientForm({ rooms }) {
   const [name, updateName] = useState('')
   const [gender, updateGender] = useState('')
   const [bedSelected, updateBedSelected] = useState(null)
+  const [submitError, updateSubmitError] = useState(false)
 
   let bedsAvail = []
   rooms.forEach((room) => {
     bedsAvail = bedsAvail.concat(room.Beds.filter(bed => !bed.Patient))
   });
 
+  const submitPatient = (e) => {
+    e.preventDefault()
+    if (!name || !gender || !bedSelected) {
+      updateSubmitError(true)
+    }
+    console.log('It\'s time to party')
+  }
+
   return (
     <div className="add-patient-cont">
       <h4>Add Patient</h4>
 
-      <form className="add-patient">
+      <form className="add-patient"
+        onSubmit={(e) => submitPatient(e)}>
         <input
           id="name"
           placeholder="Name"
@@ -28,6 +38,7 @@ export default function AddPatientForm({ rooms }) {
           <option value="male">Male</option>
           <option value="female">Female</option>
         </select>
+        <button>Add New Patient</button>
       </form>
 
       <div className="avail-rooms">
@@ -39,6 +50,11 @@ export default function AddPatientForm({ rooms }) {
           )
         })}
       </div>
+
+      {
+        submitError &&
+        <p>All fields need to be filled in.</p>
+      }
     </div>
   )
 }
