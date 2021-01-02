@@ -15,7 +15,7 @@ class MainPage extends Component {
       floors: []
     }
     this.logout = this.logout.bind(this)
-    this.updateRooms = this.updateRooms.bind(this)
+    this.updateFloors = this.updateFloors.bind(this)
   }
 
   async componentDidMount() {
@@ -35,7 +35,7 @@ class MainPage extends Component {
     this.setState({ loggedIn: false });
   }
 
-  async updateRooms() {
+  async updateFloors() {
     const floors = await getFloors()
     this.setState({ floors })
   }
@@ -59,8 +59,8 @@ class MainPage extends Component {
           </div>
 
           <AddPatientForm
-            rooms={[]}
-            updateRooms={this.updateRooms} />
+            floors={floors}
+            updateFloors={this.updateFloors} />
         </div>
       </div>
     );

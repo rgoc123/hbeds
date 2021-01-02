@@ -2,16 +2,18 @@ import React, { useState } from 'react'
 
 import { addPatientToBed } from '../util/patientApiUtil'
 
-export default function AddPatientForm({ rooms, updateRooms }) {
+export default function AddPatientForm({ floors, updateFloors }) {
   const [name, updateName] = useState('')
   const [gender, updateGender] = useState('')
   const [bedSelected, updateBedSelected] = useState(null)
   const [submitError, updateSubmitError] = useState('')
 
   let bedsAvail = []
-  rooms.forEach((room) => {
-    bedsAvail = bedsAvail.concat(room.Beds.filter(bed => !bed.Patient))
-  });
+  floors.forEach(floor => {
+    floor.Rooms.forEach(room => {
+      bedsAvail = bedsAvail.concat(room.Beds.filter(bed => !bed.Patient))
+    })
+  })
 
   const submitPatient = async (e) => {
     e.preventDefault()
@@ -21,7 +23,7 @@ export default function AddPatientForm({ rooms, updateRooms }) {
       const res = await addPatientToBed({ name, gender, bedSelected })
 
       if (res.status === 200) {
-        updateRooms()
+        updateFloors()
         updateName('')
         updateGender('')
         updateBedSelected(null)
