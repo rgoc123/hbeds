@@ -22,6 +22,9 @@ export default function AddPatientForm({ rooms, updateRooms }) {
 
       if (res.status === 200) {
         updateRooms()
+        updateName('')
+        updateGender('')
+        updateBedSelected(null)
       } else {
         updateSubmitError(res.message)
       }
