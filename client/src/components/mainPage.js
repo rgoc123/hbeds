@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { persistUser } from '../actions/sessionActions'
 import { getFloors } from '../util/floorApiUtil'
 
-import Room from './room'
+import Floor from './floor'
 import AddPatientForm from './addPatientForm'
 
 class MainPage extends Component {
@@ -12,7 +12,7 @@ class MainPage extends Component {
     super();
     this.state = {
       loggedIn: false,
-      rooms: []
+      floors: []
     }
     this.logout = this.logout.bind(this)
     this.updateRooms = this.updateRooms.bind(this)
@@ -26,7 +26,6 @@ class MainPage extends Component {
     }
 
     const floors = await getFloors()
-    debugger
     this.setState({ floors })
   }
 
@@ -42,7 +41,7 @@ class MainPage extends Component {
   }
 
   render() {
-    const { loggedIn, rooms } = this.state
+    const { loggedIn, floors } = this.state
     const { currentUser } = this.props
 
     return (
@@ -51,9 +50,16 @@ class MainPage extends Component {
         <h4>You are {(!currentUser || !loggedIn) && 'not'} logged in.</h4>
 
         <div className="floor-add-cont">
-          <Room rooms={rooms} />
+          <div className="floors-cont">
+            {
+              floors.map(floor => {
+                return <Floor floor={floor} />
+              })
+            }
+          </div>
+
           <AddPatientForm
-            rooms={rooms}
+            rooms={[]}
             updateRooms={this.updateRooms} />
         </div>
       </div>
