@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import { addPatientToBed } from '../util/patientApiUtil'
 
-export default function AddPatientForm({ rooms }) {
+export default function AddPatientForm({ rooms, updateRooms }) {
   const [name, updateName] = useState('')
   const [gender, updateGender] = useState('')
   const [bedSelected, updateBedSelected] = useState(null)
@@ -20,7 +20,9 @@ export default function AddPatientForm({ rooms }) {
     } else {
       const res = await addPatientToBed({ name, gender, bedSelected })
 
-      if (res.status !== 200) {
+      if (res.status === 200) {
+        updateRooms()
+      } else {
         updateSubmitError(res.message)
       }
     }

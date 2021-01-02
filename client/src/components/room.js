@@ -1,21 +1,8 @@
 import React, { useState, useEffect } from 'react'
 
-import { getRooms } from '../util/roomApiUtil'
-
 import Bed from './bed'
 
-export default function Room() {
-  const [rooms, setRooms] = useState([])
-
-  useEffect(() => {
-    async function getRoomsData() {
-      const rooms = await getRooms()
-      setRooms(rooms)
-    }
-
-    getRoomsData()
-  }, [])
-
+export default function Room({ rooms }) {
   return (
     <div>
       <h4>Floor 1</h4>

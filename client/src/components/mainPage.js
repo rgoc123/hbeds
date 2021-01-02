@@ -14,7 +14,8 @@ class MainPage extends Component {
       loggedIn: false,
       rooms: []
     }
-    this.logout = this.logout.bind(this);
+    this.logout = this.logout.bind(this)
+    this.updateRooms = this.updateRooms.bind(this)
   }
 
   async componentDidMount() {
@@ -34,18 +35,25 @@ class MainPage extends Component {
     this.setState({ loggedIn: false });
   }
 
+  async updateRooms() {
+    const rooms = await getRooms()
+    this.setState({ rooms })
+  }
+
   render() {
     const { loggedIn, rooms } = this.state
     const { currentUser } = this.props
-    
+
     return (
       <div>
         <h2>Welcome to the main page!</h2>
         <h4>You are {(!currentUser || !loggedIn) && 'not'} logged in.</h4>
 
         <div className="floor-add-cont">
-          <Room />
-          <AddPatientForm rooms={rooms} />
+          <Room rooms={rooms} />
+          <AddPatientForm
+            rooms={rooms}
+            updateRooms={this.updateRooms} />
         </div>
       </div>
     );
