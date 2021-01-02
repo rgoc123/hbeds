@@ -53,7 +53,7 @@ class MainPage extends Component {
           <div className="floors-cont">
             {
               floors.map(floor => {
-                return <Floor floor={floor} />
+                return <Floor floor={floor} key={floor.uuid} />
               })
             }
           </div>

@@ -17,8 +17,13 @@
 .floor {
   width: 760px;
   display: flex;
+  flex-direction: column;
   justify-content: space-around;
   border: 1px solid black;
+}
+
+.rooms-cont {
+  display: flex;
 }
 
 .room {
