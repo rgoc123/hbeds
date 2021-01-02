@@ -66,3 +66,7 @@
 .avail-bed:hover {
   background-color: #aedbab;
 }
+
+.selected-bed {
+  background-color: #aedbab;
+}

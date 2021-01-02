@@ -16,7 +16,6 @@ export default function AddPatientForm({ rooms }) {
     if (!name || !gender || !bedSelected) {
       updateSubmitError(true)
     }
-    console.log('It\'s time to party')
   }
 
   return (
@@ -44,7 +43,7 @@ export default function AddPatientForm({ rooms }) {
       <div className="avail-rooms">
         {bedsAvail.map(bed => {
           return (
-            <div className="avail-bed"
+            <div className={"avail-bed" + (bedSelected === bed.uuid ? " selected-bed" : "")}
               onClick={() => updateBedSelected(bed.uuid)}
               key={bed.uuid}>Bed {bed.number}</div>
           )
