@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 
-import { addPatientToBed } from '../util/bedApiUtil'
+import { addPatientToBed } from '../util/patientApiUtil'
 
 export default function AddPatientForm({ rooms }) {
   const [name, updateName] = useState('')
   const [gender, updateGender] = useState('')
   const [bedSelected, updateBedSelected] = useState(null)
-  const [submitError, updateSubmitError] = useState(false)
+  const [submitError, updateSubmitError] = useState('')
 
   let bedsAvail = []
   rooms.forEach((room) => {
@@ -16,10 +16,13 @@ export default function AddPatientForm({ rooms }) {
   const submitPatient = async (e) => {
     e.preventDefault()
     if (!name || !gender || !bedSelected) {
-      updateSubmitError(true)
+      updateSubmitError('All fileds need to be filled in.')
     } else {
       const res = await addPatientToBed({ name, gender, bedSelected })
-      debugger
+
+      if (res.status !== 200) {
+        updateSubmitError(res.message)
+      }
     }
   }
 
@@ -57,7 +60,7 @@ export default function AddPatientForm({ rooms }) {
 
       {
         submitError &&
-        <p>All fields need to be filled in.</p>
+        <p>{submitError}</p>
       }
     </div>
   )

@@ -79,6 +79,7 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 const userController = require('./controllers/userController.js');
 const authController = require('./controllers/authController.js');
 const roomController = require('./controllers/roomController.js');
+const patientController = require('./controllers/patientController.js');
 
 // ROUTES
 // User
@@ -87,6 +88,9 @@ app.post('/v1/login', userController.login);
 
 // Room
 app.get('/v1/rooms', roomController.getAllRooms);
+
+// patient
+app.post('/v1/patients', patientController.createPatient)
 
 const port = process.env.PORT || 7001;
 app.listen(port, function() {
