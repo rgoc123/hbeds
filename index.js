@@ -100,6 +100,7 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 // CONTROLLERS
 const userController = require('./controllers/userController.js');
 const authController = require('./controllers/authController.js');
+const floorController = require('./controllers/floorController.js');
 const roomController = require('./controllers/roomController.js');
 const patientController = require('./controllers/patientController.js');
 
@@ -108,10 +109,13 @@ const patientController = require('./controllers/patientController.js');
 app.post('/v1/register', userController.register);
 app.post('/v1/login', userController.login);
 
+// Floor
+app.get('/v1/floors', floorController.getAllFloors);
+
 // Room
 app.get('/v1/rooms', roomController.getAllRooms);
 
-// patient
+// Patient
 app.post('/v1/patients', patientController.createPatient)
 
 const port = process.env.PORT || 7001;

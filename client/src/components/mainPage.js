@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { persistUser } from '../actions/sessionActions'
-import { getRooms } from '../util/roomApiUtil'
+import { getFloors } from '../util/floorApiUtil'
 
 import Room from './room'
 import AddPatientForm from './addPatientForm'
@@ -25,8 +25,9 @@ class MainPage extends Component {
       this.setState({ loggedIn: true })
     }
 
-    const rooms = await getRooms()
-    this.setState({ rooms })
+    const floors = await getFloors()
+    debugger
+    this.setState({ floors })
   }
 
   logout() {
@@ -36,8 +37,8 @@ class MainPage extends Component {
   }
 
   async updateRooms() {
-    const rooms = await getRooms()
-    this.setState({ rooms })
+    const floors = await getFloors()
+    this.setState({ floors })
   }
 
   render() {
