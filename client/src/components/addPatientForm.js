@@ -45,6 +45,7 @@ export default function AddPatientForm({ floors, updateFloors }) {
           value={name}
           onChange={(e) => updateName(e.target.value)} />
         <select
+          id="gender"
           name="gender"
           value={gender}
           onChange={(e) => updateGender(e.target.value)} >
