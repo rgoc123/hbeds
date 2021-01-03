@@ -18,7 +18,7 @@ export default function AddPatientForm({ floors, updateFloors }) {
   const submitPatient = async (e) => {
     e.preventDefault()
     if (!name || !gender || !bedSelected) {
-      updateSubmitError('All fileds need to be filled in.')
+      updateSubmitError('All fields need to be filled in.')
     } else {
       const res = await addPatientToBed({ name, gender, bedSelected })
 
