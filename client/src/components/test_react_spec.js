@@ -39,7 +39,7 @@ const floors = [
             "createdAt": "2021-01-02T23:22:10.392Z",
             "number": "C",
             "updatedAt": "2021-01-02T23:22:10.420Z",
-            "uuid": "dd2bfec2-5f17-4dd2-918d-700e2a994ee2"
+            "uuid": "2db9f2ac-2470-46e2-8e2f-db165c4ba9e2"
           },
           {
             "Patient": null,
@@ -65,16 +65,75 @@ const floors = [
 ]
 
 describe('Test React Test', () => {
-  it('works', () => {
-    cy.on('uncaught:exception', (err, runnable) => {
-      return false
-    })
+  cy.on('uncaught:exception', (err, runnable) => {
+    return false
+  })
 
+  it('Mounts', () => {
     mount(
       <AddPatientForm floors={floors} updateFloors={() => null} />,
       { React, ReactDOM }
     )
-    // now use standard Cypress commands
+
     cy.contains('Add Patient').should('be.visible')
+  })
+
+  it('Adds name input to form state', () => {
+    cy.get('#name')
+      .type('Roberto')
+      .should('have.value', 'Roberto')
+  })
+
+  it('Shows the error with no name', () => {
+    mount(
+      <AddPatientForm floors={floors} updateFloors={() => null} />,
+      { React, ReactDOM }
+    )
+
+    cy.get('#gender').select('male')
+    cy.get('.avail-bed').first().click()
+
+    cy.contains('Add New Patient').click()
+    cy.contains('All fields need to be filled in.')
+  })
+
+  it('Shows the error with no gender', () => {
+    mount(
+      <AddPatientForm floors={floors} updateFloors={() => null} />,
+      { React, ReactDOM }
+    )
+
+    cy.get('#name').type('Roberto')
+    cy.get('.avail-bed').first().click()
+
+    cy.contains('Add New Patient').click()
+    cy.contains('All fields need to be filled in.')
+  })
+
+  it('Shows the error with no bed selected', () => {
+    mount(
+      <AddPatientForm floors={floors} updateFloors={() => null} />,
+      { React, ReactDOM }
+    )
+
+    cy.get('#name').type('Roberto')
+    cy.get('#gender').select('male')
+
+    cy.contains('Add New Patient').click()
+    cy.contains('All fields need to be filled in.')
+  })
+
+  it('Fires when all fields are filled', () => {
+    mount(
+      <AddPatientForm floors={floors} updateFloors={() => console.log('success')} />,
+      { React, ReactDOM }
+    )
+
+    cy.get('#name').type('Roberto')
+    cy.get('#gender').select('male')
+    cy.get('.avail-bed').first().click()
+
+    cy.contains('Add New Patient').click()
+
   })
 })
