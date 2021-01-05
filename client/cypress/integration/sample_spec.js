@@ -14,8 +14,21 @@ describe('My First Test', () => {
   //   cy.contains('All fields need to be filled in.')
   // })
 
+
+  it('Shows available rooms', () => {
+    cy.intercept('GET', '/v1/floors', { fixture: 'floors.json' })
+      .as('getFloors')
+
+    cy.visit('/')
+
+    cy.wait('@getFloors').then((interception) => {
+      console.log(interception.response.body)
+      assert.isNotNull(interception.response.body)
+    })
+  })
+
   it('Produces submit error when no name input', () => {
-    cy.visit('http://localhost:3000/#/')
+    cy.visit('/')
 
     cy.get('#gender')
       .select('male')

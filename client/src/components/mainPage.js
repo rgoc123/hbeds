@@ -5,7 +5,7 @@ import { persistUser } from '../actions/sessionActions'
 import { getFloors } from '../util/floorApiUtil'
 
 import Floor from './floor'
-import AddPatientForm from './addPatientForm'
+import AddPatientForm from './addPatientForm.jsx'
 
 class MainPage extends Component {
   constructor() {
@@ -26,6 +26,7 @@ class MainPage extends Component {
     }
 
     const floors = await getFloors()
+    console.log(floors)
     this.setState({ floors })
   }
 
@@ -52,6 +53,7 @@ class MainPage extends Component {
         <div className="floor-add-cont">
           <div className="floors-cont">
             {
+              Array.isArray(floors) &&
               floors.map(floor => {
                 return <Floor floor={floor} key={floor.uuid} />
               })

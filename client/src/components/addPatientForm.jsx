@@ -9,11 +9,13 @@ export default function AddPatientForm({ floors, updateFloors }) {
   const [submitError, updateSubmitError] = useState('')
 
   let bedsAvail = []
-  floors.forEach(floor => {
-    floor.Rooms.forEach(room => {
-      bedsAvail = bedsAvail.concat(room.Beds.filter(bed => !bed.Patient))
+  if (floors && Array.isArray(floors)) {
+    floors.forEach(floor => {
+      floor.Rooms.forEach(room => {
+        bedsAvail = bedsAvail.concat(room.Beds.filter(bed => !bed.Patient))
+      })
     })
-  })
+  }
 
   const submitPatient = async (e) => {
     e.preventDefault()
